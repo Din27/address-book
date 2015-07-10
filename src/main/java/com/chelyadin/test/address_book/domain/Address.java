@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -65,7 +67,10 @@ public class Address {
     @Column(name="phone", length = MAX_PHONE_SIZE)
     private List<String> phones;
 
-    public Address() {}
+    public Address() {
+        phones = new ArrayList<>();
+        phones.add("");// one default form
+    }
 
     public Address(String fullname, String postcode, String country, String region, String city,
                    String address1, String address2, List<String> phones) {

@@ -6,8 +6,10 @@
 <head>
     <title>Address Book</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="/js/lib/jquery-2.1.4.min.js"></script>
     <link rel="stylesheet" href="/js/lib/bootstrap/css/bootstrap.min.css">
     <script src="/js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/phones.js"></script>
 </head>
 <body>
 <%--TODO Bootstrap--%>
@@ -82,19 +84,17 @@
                 </div>
             </div>
 
+            <c:forEach varStatus="status" var="phone" items="${address.phones}">
             <div class="form-group">
-                <label for="phone0" class="col-sm-2 control-label">Phone 1</label>
+                <label for="phone${status.index}" class="col-sm-2 control-label"><c:if test="${status.index == 0}">Phones</c:if></label>
                 <div class="col-sm-10">
-                    <form:input id="phone0" path="phones[0]" type="text" class="form-control"/>
+                    <form:input id="phone${status.index}" path="phones[${status.index}]" type="text" class="form-control"/>
                 </div>
             </div>
+            </c:forEach>
 
-            <div class="form-group">
-                <label for="phone1" class="col-sm-2 control-label">Phone 2</label>
-                <div class="col-sm-10">
-                    <form:input id="phone1" path="phones[1]" type="text" class="form-control"/>
-                </div>
-            </div>
+            <script>$(document).ready(function() { startPhones(${address.phones.size()}); });</script>
+            <button type="button" class="btn btn-default add-phone" onclick="">+</button>
 
             <button type="submit" class="btn btn-primary btn-block">Add</button>
         </form:form>
