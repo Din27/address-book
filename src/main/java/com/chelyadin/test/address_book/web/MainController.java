@@ -41,7 +41,6 @@ public class MainController {
         return modelAndView;
     }
 
-    // TODO add exception handling for ?/error
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute("address") @Valid Address address, BindingResult bindingResult) {
         LOG.info("Save address request");

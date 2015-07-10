@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * @author Dmitriy Chelyadin
  */
-// TODO validation for fields
 @Entity
 @Table(name = "addresses")
 public class Address {

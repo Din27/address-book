@@ -61,7 +61,6 @@ public class MainControllerTest extends TestBase {
 
     @Test
     public void testIndex() throws Exception {
-        // TODO phones
         when(addressService.getAll()).thenReturn(Arrays.asList(ADDRESS_OBJECT, ADDRESS_OBJECT_2));
 
         mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.TEXT_HTML))

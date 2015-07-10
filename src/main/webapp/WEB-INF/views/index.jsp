@@ -12,8 +12,6 @@
     <script src="/js/phones.js"></script>
 </head>
 <body>
-<%--TODO Bootstrap--%>
-<%--TODO Correct names--%>
     <div class="container" >
         <h1 class="text-center header">Address Book</h1>
         <hr class="divider"/>
