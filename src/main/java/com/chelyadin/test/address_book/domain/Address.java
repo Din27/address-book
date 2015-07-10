@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -65,7 +64,7 @@ public class Address {
             joinColumns=@JoinColumn(name="address_id")
     )
     @Column(name="phone", length = MAX_PHONE_SIZE)
-    private List<String> phones;
+    private List<String> phones; // KISS. No need for difficult objects. validation with @Phones should be enough
 
     public Address() {
         phones = new ArrayList<>();
