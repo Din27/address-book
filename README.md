@@ -3,11 +3,13 @@
 ### Overview
 Simple test project, which simulates Address Book.
 You can save/read addressses with phone numbers. Each address can have 1 to N phone numbers.
+
 Screenshot: http://i.imgur.com/Mkj9CBV.png
 
 ### Running
 The application uses Spring Boot with embedded Tomcat and HSQLDB. To run, just use command
 *mvn clean spring-boot:run*
+
 Nothing else is required - database and tables will be created in HSQLDB automatically.
 
 ### Full technology stack and reasons to choose
