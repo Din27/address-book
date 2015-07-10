@@ -1,5 +1,6 @@
 package com.chelyadin.test.address_book.domain;
 
+import com.chelyadin.test.address_book.validation.Phones;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -13,6 +14,8 @@ import java.util.List;
 @Entity
 @Table(name = "addresses")
 public class Address {
+
+    public static final int MAX_PHONE_SIZE = 30;
 
     @Id
     @Column(name = "id", updatable = false)
@@ -52,13 +55,15 @@ public class Address {
     @Column(name = "address2", length = 100)
     private String address2; // appartment, unit, building, floor
 
+    @Phones
+    @NotEmpty
     @ElementCollection
     @CollectionTable(
             name="phones",
             joinColumns=@JoinColumn(name="address_id")
     )
-    @Column(name="phone", length = 30)
-    private List<String> phones; // TODO validation
+    @Column(name="phone", length = MAX_PHONE_SIZE)
+    private List<String> phones;
 
     public Address() {}
 

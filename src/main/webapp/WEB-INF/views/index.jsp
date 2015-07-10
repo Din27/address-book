@@ -82,6 +82,20 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="phone0" class="col-sm-2 control-label">Phone 1</label>
+                <div class="col-sm-10">
+                    <form:input id="phone0" path="phones[0]" type="text" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone1" class="col-sm-2 control-label">Phone 2</label>
+                <div class="col-sm-10">
+                    <form:input id="phone1" path="phones[1]" type="text" class="form-control"/>
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-primary btn-block">Add</button>
         </form:form>
 
@@ -98,6 +112,7 @@
                     <th>Region</th>
                     <th>Postal Code</th>
                     <th>Country</th>
+                    <th>Phones</th>
                 </thead>
                 <tbody>
                     <c:forEach varStatus="status" var="addr" items="${addresses}">
@@ -110,6 +125,11 @@
                         <td>${addr.region}</td>
                         <td>${addr.postcode}</td>
                         <td>${addr.country}</td>
+                        <td>
+                            <c:forEach varStatus="status" var="phone" items="${addr.phones}">
+                                <c:out value="${phone}"/><br/>
+                            </c:forEach>
+                        </td>
                     </tr>
                     </c:forEach>
                 </tbody>
