@@ -26,10 +26,15 @@ form.form-horizontal {
 .table {
     table-layout:fixed;
     margin: 5px auto 0;
+    font-size: 12px;
 }
 
 .table td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.table .col-number {
+    width: 30px;
 }

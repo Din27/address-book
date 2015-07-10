@@ -93,8 +93,15 @@
             </div>
             </c:forEach>
 
-            <script>$(document).ready(function() { startPhones(${address.phones.size()}); });</script>
-            <button type="button" class="btn btn-default add-phone" onclick="">+</button>
+
+
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-10">
+                    <script>$(document).ready(function() { startPhones(${address.phones.size()}); });</script>
+                    <button type="button" class="btn btn-default add-phone" onclick="">+</button>
+                </div>
+            </div>
 
             <button type="submit" class="btn btn-primary btn-block">Add</button>
         </form:form>
@@ -104,7 +111,7 @@
             <hr class="divider"/>
             <table class="table">
                 <thead>
-                    <th>#</th>
+                    <th class="col-number">#</th>
                     <th>Full Name</th>
                     <th>Address Line 1</th>
                     <th>Address Line 2</th>

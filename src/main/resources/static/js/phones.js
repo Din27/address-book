@@ -6,7 +6,7 @@ function startPhones(phonesSize) {
         '<label for="phone' + index + '" class="col-sm-2 control-label"></label>'+
         '<div class="col-sm-10"><input id="phone' + index + '" name="phones[' + index + ']" type="text" class="form-control"/></div>'+
         '</div>')
-            .insertAfter($(".form-group").last());
+            .insertBefore($(".form-group").last());
         index++;
     });
 
