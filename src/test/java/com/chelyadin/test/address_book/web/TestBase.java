@@ -24,7 +24,15 @@ public class TestBase {
     protected final static String ADDRESS_1_2 = "13 Broadway";
     protected final static String ADDRESS_2_2 = "Apartment 17";
 
-    protected final static Address ADDRESS_OBJECT = new Address(FULLNAME, POSTCODE, COUNTRY, REGION, CITY, ADDRESS_1, ADDRESS_2, Arrays.asList());
-    protected final static Address ADDRESS_OBJECT_2 = new Address(FULLNAME_2, POSTCODE_2, COUNTRY_2, REGION_2, CITY_2, ADDRESS_1_2, ADDRESS_2_2, Arrays.asList());
+
+    protected final static String PHONE_1 = "+380503625574";
+    protected final static String PHONE_2 = "+38(050)3423333";
+    protected final static String PHONE_3 = "362-55-27";
+    protected final static String PHONE_4 = "(067) 320 50 34";
+    protected final static String PHONE_INCORRECT = "Incorrect Phone :(";
+    protected final static String PHONE_EMPTY = "";
+
+    protected final static Address ADDRESS_OBJECT = new Address(FULLNAME, POSTCODE, COUNTRY, REGION, CITY, ADDRESS_1, ADDRESS_2, Arrays.asList(PHONE_1, PHONE_2, PHONE_3));
+    protected final static Address ADDRESS_OBJECT_2 = new Address(FULLNAME_2, POSTCODE_2, COUNTRY_2, REGION_2, CITY_2, ADDRESS_1_2, ADDRESS_2_2, Arrays.asList(PHONE_4));
 
 }

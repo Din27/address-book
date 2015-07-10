@@ -37,8 +37,12 @@ public class MainControllerTest extends TestBase {
     private final static String FIELD_NAME_COUNTRY = "country";
     private final static String FIELD_NAME_REGION = "region";
     private final static String FIELD_NAME_CITY = "city";
-    private final static String FIELD_NAME_ADDRESS1 = "address1";
-    private final static String FIELD_NAME_ADDRESS2 = "address2";
+    private final static String FIELD_NAME_ADDRESS_1 = "address1";
+    private final static String FIELD_NAME_ADDRESS_2 = "address2";
+    private final static String FIELD_NAME_PHONES_1 = "phones[0]";
+    private final static String FIELD_NAME_PHONES_2 = "phones[1]";
+    private final static String FIELD_NAME_PHONES_3 = "phones[2]";
+    private final static String FIELD_NAME_PHONES_4 = "phones[3]";
 
     private MockMvc mvc;
 
@@ -75,8 +79,12 @@ public class MainControllerTest extends TestBase {
                 .param(FIELD_NAME_COUNTRY, COUNTRY)
                 .param(FIELD_NAME_REGION, REGION)
                 .param(FIELD_NAME_CITY, CITY)
-                .param(FIELD_NAME_ADDRESS1, ADDRESS_1)
-                .param(FIELD_NAME_ADDRESS2, ADDRESS_2)
+                .param(FIELD_NAME_ADDRESS_1, ADDRESS_1)
+                .param(FIELD_NAME_ADDRESS_2, ADDRESS_2)
+                .param(FIELD_NAME_PHONES_1, PHONE_1)
+                .param(FIELD_NAME_PHONES_2, PHONE_2)
+                .param(FIELD_NAME_PHONES_3, PHONE_3)
+                .param(FIELD_NAME_PHONES_4, PHONE_4)
                 .accept(MediaType.TEXT_HTML))
 
                 .andExpect(redirectedUrl("/?added"))
@@ -84,19 +92,72 @@ public class MainControllerTest extends TestBase {
     }
 
     @Test
-    public void testSave_validationFails() throws Exception {
+    public void testSave_validationFails_fullname() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/save")
                 .param(FIELD_NAME_FULLNAME, "")
                 .param(FIELD_NAME_POSTCODE, POSTCODE)
                 .param(FIELD_NAME_COUNTRY, COUNTRY)
                 .param(FIELD_NAME_REGION, REGION)
                 .param(FIELD_NAME_CITY, CITY)
-                .param(FIELD_NAME_ADDRESS1, ADDRESS_1)
-                .param(FIELD_NAME_ADDRESS2, ADDRESS_2)
+                .param(FIELD_NAME_ADDRESS_1, ADDRESS_1)
+                .param(FIELD_NAME_ADDRESS_2, ADDRESS_2)
                 .accept(MediaType.TEXT_HTML))
 
                 .andExpect(view().name("index"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeHasFieldErrors("address", FIELD_NAME_FULLNAME));
+    }
+
+    @Test
+    public void testSave_validationFails_phoneEmptyString() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/save")
+                .param(FIELD_NAME_FULLNAME, FULLNAME)
+                .param(FIELD_NAME_POSTCODE, POSTCODE)
+                .param(FIELD_NAME_COUNTRY, COUNTRY)
+                .param(FIELD_NAME_REGION, REGION)
+                .param(FIELD_NAME_CITY, CITY)
+                .param(FIELD_NAME_ADDRESS_1, ADDRESS_1)
+                .param(FIELD_NAME_ADDRESS_2, ADDRESS_2)
+                .param(FIELD_NAME_PHONES_1, PHONE_EMPTY)
+                .accept(MediaType.TEXT_HTML))
+
+                .andExpect(view().name("index"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeHasFieldErrors("address"));
+    }
+
+    @Test
+    public void testSave_validationFails_phoneIncorrect() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/save")
+                .param(FIELD_NAME_FULLNAME, FULLNAME)
+                .param(FIELD_NAME_POSTCODE, POSTCODE)
+                .param(FIELD_NAME_COUNTRY, COUNTRY)
+                .param(FIELD_NAME_REGION, REGION)
+                .param(FIELD_NAME_CITY, CITY)
+                .param(FIELD_NAME_ADDRESS_1, ADDRESS_1)
+                .param(FIELD_NAME_ADDRESS_2, ADDRESS_2)
+                .param(FIELD_NAME_PHONES_1, PHONE_INCORRECT)
+                .accept(MediaType.TEXT_HTML))
+
+                .andExpect(view().name("index"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeHasFieldErrors("address"));
+    }
+
+    @Test
+    public void testSave_validationFails_noPhones() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/save")
+                .param(FIELD_NAME_FULLNAME, FULLNAME)
+                .param(FIELD_NAME_POSTCODE, POSTCODE)
+                .param(FIELD_NAME_COUNTRY, COUNTRY)
+                .param(FIELD_NAME_REGION, REGION)
+                .param(FIELD_NAME_CITY, CITY)
+                .param(FIELD_NAME_ADDRESS_1, ADDRESS_1)
+                .param(FIELD_NAME_ADDRESS_2, ADDRESS_2)
+                .accept(MediaType.TEXT_HTML))
+
+                .andExpect(view().name("index"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeHasFieldErrors("address"));
     }
 }
