@@ -1,5 +1,6 @@
 package com.chelyadin.test.address_book.web;
 
+import com.chelyadin.test.address_book.TestBase;
 import com.chelyadin.test.address_book.domain.Address;
 import com.chelyadin.test.address_book.service.AddressService;
 import org.junit.Before;

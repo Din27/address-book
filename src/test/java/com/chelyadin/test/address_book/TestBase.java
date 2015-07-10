@@ -1,4 +1,4 @@
-package com.chelyadin.test.address_book.web;
+package com.chelyadin.test.address_book;
 
 import com.chelyadin.test.address_book.domain.Address;
 

@@ -1,9 +1,8 @@
-package com.chelyadin.test.address_book.web;
+package com.chelyadin.test.address_book.service;
 
+import com.chelyadin.test.address_book.TestBase;
 import com.chelyadin.test.address_book.domain.Address;
 import com.chelyadin.test.address_book.repository.AddressRepo;
-import com.chelyadin.test.address_book.service.AddressService;
-import com.chelyadin.test.address_book.service.AddressServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
