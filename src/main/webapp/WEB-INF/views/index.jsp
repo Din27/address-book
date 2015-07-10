@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,49 +9,54 @@
 <body>
 <%--TODO Bootstrap--%>
 <%--TODO Correct names--%>
-    <form id="addressForm"
-          name="addressForm"
+    <div>
+        <c:out value="${msg}"/>
+    </div>
+    <form:form
+          commandName="address"
           role="form"
-          action="<c:url value='/save' />"
+          action="/save"
           method="POST">
+
+        <form:errors path="*" element="div" cssClass="errorMsg" />
 
         <div>
             <label for="fullname">Full Name:</label>
-            <input id="fullname" name="fullname" type="text">
+            <form:input id="fullname" path="fullname" type="text"/>
         </div>
 
         <div>
             <label for="postcode">Post / ZIP code:</label>
-            <input id="postcode" name="postcode" type="text">
+            <form:input id="postcode" path="postcode" type="text"/>
         </div>
 
         <div>
             <label for="country">Country</label>
-            <input id="country" name="country" type="text">
+            <form:input id="country" path="country" type="text"/>
         </div>
 
         <div>
             <label for="region">Region / State / County</label>
-            <input id="region" name="region" type="text">
+            <form:input id="region" path="region" type="text"/>
         </div>
 
         <div>
             <label for="city">City</label>
-            <input id="city" name="city" type="text">
+            <form:input id="city" path="city" type="text"/>
         </div>
 
         <div>
             <label for="address1">Address 1</label>
-            <input id="address1" name="address1" type="text">
+            <form:input id="address1" path="address1" type="text"/>
         </div>
 
         <div>
             <label for="address2">Address 2</label>
-            <input id="address2" name="address2" type="text">
+            <form:input id="address2" path="address2" type="text"/>
         </div>
 
-        <button type="submit">Save</button>
-    </form>
+        <button type="submit">Add</button>
+    </form:form>
 
     <table>
         <thead>
@@ -63,16 +70,16 @@
             <th>Address 2</th>
         </thead>
         <tbody>
-            <c:forEach varStatus="status" var="address" items="${addresses}">
+            <c:forEach varStatus="status" var="addr" items="${addresses}">
             <tr>
                 <td>${status.index + 1}</td>
-                <td>${address.fullname}</td>
-                <td>${address.postcode}</td>
-                <td>${address.country}</td>
-                <td>${address.region}</td>
-                <td>${address.city}</td>
-                <td>${address.address1}</td>
-                <td>${address.address2}</td>
+                <td>${addr.fullname}</td>
+                <td>${addr.postcode}</td>
+                <td>${addr.country}</td>
+                <td>${addr.region}</td>
+                <td>${addr.city}</td>
+                <td>${addr.address1}</td>
+                <td>${addr.address2}</td>
             </tr>
             </c:forEach>
         </tbody>

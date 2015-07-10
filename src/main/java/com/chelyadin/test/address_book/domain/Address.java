@@ -1,5 +1,8 @@
 package com.chelyadin.test.address_book.domain;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,24 +19,36 @@ public class Address {
     @GeneratedValue
     private Long id;
 
+    @NotEmpty
+    @Length(max = 100)
     @Column(name = "fullname", length = 100, nullable = false)
     private String fullname;
 
+    @NotEmpty
+    @Length(max = 9)
     @Column(name = "postcode", length = 9, nullable = false)
-    private String postcode; // zip / postal code // TODO validate, min length 5? or jusst not empty?
+    private String postcode; // zip / postal code
 
+    @NotEmpty
+    @Length(max = 70)
     @Column(name = "country", length = 70, nullable = false)
     private String country;
 
+    @Length(max = 70)
     @Column(name = "region", length = 70)
     private String region; // state / province / region / county
 
+    @NotEmpty
+    @Length(max = 70)
     @Column(name = "city", length = 70, nullable = false)
     private String city;
 
+    @NotEmpty
+    @Length(max = 100)
     @Column(name = "address1", length = 100, nullable = false)
     private String address1; // street address and house number
 
+    @Length(max = 100)
     @Column(name = "address2", length = 100)
     private String address2; // appartment, unit, building, floor
 

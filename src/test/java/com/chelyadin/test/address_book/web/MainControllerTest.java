@@ -1,5 +1,6 @@
 package com.chelyadin.test.address_book.web;
 
+import com.chelyadin.test.address_book.domain.Address;
 import com.chelyadin.test.address_book.service.AddressService;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -60,11 +63,12 @@ public class MainControllerTest extends TestBase {
         mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.TEXT_HTML))
                 .andExpect(view().name("index"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("addresses"));
+                .andExpect(model().attribute("addresses", equalTo(Arrays.asList(ADDRESS_OBJECT, ADDRESS_OBJECT_2))))
+                .andExpect(model().attribute("address", equalTo(new Address())));
     }
 
     @Test
-    public void testSave() throws Exception {
+    public void testSave_success() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/save")
                 .param(FIELD_NAME_FULLNAME, FULLNAME)
                 .param(FIELD_NAME_POSTCODE, POSTCODE)
@@ -75,7 +79,24 @@ public class MainControllerTest extends TestBase {
                 .param(FIELD_NAME_ADDRESS2, ADDRESS_2)
                 .accept(MediaType.TEXT_HTML))
 
-                .andExpect(redirectedUrl("/"))
+                .andExpect(redirectedUrl("/?added"))
                 .andExpect(status().is(302)); // because of redirect
+    }
+
+    @Test
+    public void testSave_validationFails() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/save")
+                .param(FIELD_NAME_FULLNAME, "")
+                .param(FIELD_NAME_POSTCODE, POSTCODE)
+                .param(FIELD_NAME_COUNTRY, COUNTRY)
+                .param(FIELD_NAME_REGION, REGION)
+                .param(FIELD_NAME_CITY, CITY)
+                .param(FIELD_NAME_ADDRESS1, ADDRESS_1)
+                .param(FIELD_NAME_ADDRESS2, ADDRESS_2)
+                .accept(MediaType.TEXT_HTML))
+
+                .andExpect(view().name("index"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeHasFieldErrors("address", FIELD_NAME_FULLNAME));
     }
 }
